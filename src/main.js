@@ -1,6 +1,6 @@
 import './styles.css';
 import $ from 'jquery';
-import  HungryBear  from './../src/hungrybear.js';
+import  HungryBear  from './../src/js/hungrybear.js';
 
 $(document).ready(function(){
   $('#hangryBearImage').hide()

@@ -1,11 +1,12 @@
-
-import  HungryBear  from './../src/hungrybear.js';
+import  { bear }  from './../src/js/hungrybear.js';
 
 describe('HungryBear', function() {
-  let fuzzy = new HungryBear("Fuzzy");
+  let fuzzy = bear;
 
   beforeEach(function() {
     jasmine.clock().install();
+    fuzzy.foodLevel = 10;
+    fuzzy.name = "Fuzzy";
     fuzzy.setHunger();
   });
 
@@ -34,15 +35,8 @@ describe('HungryBear', function() {
     expect(fuzzy.didYouGetEaten()).toEqual(true);
   });
 
-  it('should have a food level of ten if it is fed', function() {
-    jasmine.clock().tick(9001);
-    fuzzy.feed();
-    expect(fuzzy.foodLevel).toEqual(10);
+  it('should return that the bear ate blueberries and the food level should go up 5', function() {
+    expect(fuzzy.eatSmall("blueberries")).toEqual("The bear ate the blueberries! Food level goes up 5!");
+    expect(fuzzy.foodLevel).toEqual(15);
   });
 });
-
-// With Jasmine Clock, we need to set up the clock before each test and then tear it down after each test,
-// so we add a beforeEach() and afterEach() block where we install and then uninstall the clock.
-// Once the clock is installed, we have access to the tick() helper method. Each tick is a millisecond,
-// so when we call jasmine.clock().tick(3001);, that means just over three seconds have passed. When fuzzy is created,
-// he should have a foodLevel of 10. After three seconds, fuzzy’s foodLevel should be down to 7.
